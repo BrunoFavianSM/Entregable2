@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+	<link rel="icon" href="img/img_page.png" type="image/png">
+	<title>Apple Store</title>
+	
+
+	<style>
+		body{
+			background-color: #F5F5F7;
+			font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+		}
+		
+		.carousel-inner img {
+		width: 100%;
+		height: 100%;
+		}
+		
+		.rounded {
+         border-radius: 10px;
+      	}
+
+		.rounded-corner {
+    	border-radius: 35px;
+		transition: transform 0.3s ease;
+		}
+
+		.rounded-corner:hover {
+    	transform: scale(1.05); 
+		}
+
+		a:link,
+      	a:visited,
+      	a:active {
+        text-decoration: none;
+      	}
+
+		#btn-mas{
+			display: none;
+		}
+		.redes a, .bx-plus{
+			display: block;
+			text-decoration: none;
+			background: #afafaf;
+			color: #ffffff;
+			width: 55px;
+			height: 55px;
+			line-height: 55px;
+			text-align: center;
+			border-radius: 50%;
+			box-shadow: 0px 1px 10px rgba(0,0,0,0,4);
+			transition: all 500ms ease;
+		}
+		.redes a:hover{
+			background-color: #fff;
+			color: #afafaf;
+		}
+		.redes a{
+			margin-bottom: -15px;
+			opacity: 0;
+			visibility: hidden;
+		}
+		#btn-mas:checked~ .redes a{
+			margin-bottom: 10px;
+			opacity: 1;
+			visibility: visible;
+		}
+		.bx-plus{
+			cursor: pointer;
+			background: #afafaf;
+			font-size: 23px;
+		}
+
+
+		/* Color de la sujerencia de busqueda*/
+		#resultsContainer {
+			display: none;
+			position: absolute;
+			width: 300px;
+			background-color: #ffffff; /* Color de fondo gris oscuro */
+			border: 1px solid #ccc;
+			border-radius: 5px; /* Bordes redondeados */
+			z-index: 1;
+			color: #fff; /* Color de texto blanco */
+		}
+
+		.resultItem {
+			padding: 10px;
+			cursor: pointer;
+			color: #999; /* Cambio a un color de texto negro grisáceo */
+		}
+
+		.resultItem:hover {
+			background-color: #f1f1f1; /* Cambio de color al pasar el ratón */
+		}
+
+	</style>
+
+	<script>
+	
+	</script>
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #000000;">
+
+		<div class="collapse navbar-collapse justify-content-center" id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<a class="navbar-brand" href="index.html"> <i class='bx bxl-apple bx-sm'></i> </a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" style="margin-right: 10px;">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<li class="nav-item" style="margin-right: 10px;">
+					<a class="nav-link" href="#" style="color:#fff;">Tienda</a>
+				</li>
+				<li class="nav-item" style="margin-right: 10px;">
+					<a class="nav-link" href="#" style="color:#fff;">Mac</a>
+				</li>
+				<li class="nav-item" style="margin-right: 10px;">
+					<a class="nav-link" href="#" style="color:#fff;">iPad</a>
+				</li>
+				<li class="nav-item" style="margin-right: 10px;">
+					<a class="nav-link" href="#" style="color:#fff;">iPhone</a>
+				</li>
+				<li class="nav-item" style="margin-right: 10px;">
+					<a class="nav-link" href="#" style="color:#fff;">Watch</a>
+				</li>
+				<li class="nav-item" style="margin-right: 10px;">
+					<a class="nav-link" href="#" style="color:#fff;">Airpods</a>
+				</li>
+				<li class="nav-item" style="margin-right: 10px;">
+					<a class="nav-link" href="#" style="color:#fff;">TV y Casa</a>
+				</li>
+				<li class="nav-item" style="margin-right: 10px;">
+					<a class="nav-link" href="#" style="color:#fff;">Entretenimiento</a>
+				</li>
+				<li class="nav-item" style="margin-right: 10px;">
+					<a class="nav-link" href="#" style="color:#fff;">Accesorios</a>
+				</li>
+				<li class="nav-item" style="margin-right: 10px;">
+					<a class="nav-link" href="#" style="color:#fff;" data-toggle="modal" data-target="#ingCliente">Soporte</a>
+				</li>
+								
+				<li class="nav-item" style="margin-right: 10px;">
+					<a class="navbar-brand" href="index.html"><i class='bx bx-shopping-bag' style='color:#ffffff' ></i> </a>
+				</li>
+
+				<li class="nav-item" style="margin-right: 10px;">
+					<a class="navbar-brand" href="index.html" data-toggle="collapse" data-target="#demo1"><i class='bx bx-search-alt-2' style='color:#ffffff' ></i></a>
+				</li>
+
+				<div id="demo1" class="collapse">
+					<input class="form-control mr-sm-2" type="text" placeholder="Buscar en apple.com" id="searchInput">
+					<div id="resultsContainer"></div>
+					<!-- <button class="btn btn-light" type="submit"><img src="img/buscar_logo.png" width="25px" height="25px"></button> -->
+				</div>
+				
+			</ul>
+		</div> 
+	</nav>
+
+	<div id="demo" class="carousel slide" data-ride="carousel">
+
+	  <!-- Indicators -->
+	  <ul class="carousel-indicators">
+	    <li data-target="#demo" data-slide-to="0" class="active"></li>
+	    <li data-target="#demo" data-slide-to="1"></li>
+	    <li data-target="#demo" data-slide-to="2"></li>
+	  </ul>
+	  
+	  <!-- The slideshow -->
+	  <div class="carousel-inner">
+	    <div class="carousel-item active">
+	      <img src="img/carousel_01.png" alt="iPhone15"> <!-- width="1903" height="745" -->
+	    </div>
+	    <div class="carousel-item">
+	      <img src="img/carousel_02.png" alt="iPad">
+	    </div>
+	    <div class="carousel-item">
+	      <img src="img/carousel_03.png" alt="Mac">
+	    </div>
+	  </div>
+	  
+	  <!-- Left and right controls -->
+	  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+	    <span class="carousel-control-prev-icon"></span>
+	  </a>
+	  <a class="carousel-control-next" href="#demo" data-slide="next">
+	    <span class="carousel-control-next-icon"></span>
+	  </a>
+	</div><br>
+
+	<div class="container mt-5">
+		<div class="row ">
+			<div class="col-6">
+				<h1>Tienda.</h1>
+				<h1 class="text-secondary">  La mejor forma de comprar tus productos favoritos.</h1>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container mt-5">
+		<div class="row ">
+			<div class="col-6">
+				<h3>Lo último.</h3>
+				<h3 class="text-secondary">Echa un vistazo a las novedades.</h3>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container mt-5">
+		<div class="row">
+			<div class="col-sm-4 rounded-corner" style="background-color: #FFFFFF;">
+				<a href="apple-vision-pro.html">
+					<div class="container mt-5">
+						<div class="row">
+							<div class="col-sm-12 text-dark">
+								<h3>Apple vision pro</h3><span class="badge badge-pill badge-danger">Nuevo</span>	
+								<p>De $3499 o $291.58 / por mes durante 12 meses</p>
+								<div class="dark_white_bg text-center" ><img  src="img/producto_01.png" width="300" alt="#"/></div><br>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="col-sm-4 rounded-corner" style="background-color: #FFFFFF;">
+				<a href="macbook-air.html" style="color: #000000;">
+					<div class="container mt-5">
+						<div class="row">
+							<div class="col-sm-12">
+								<h3>MacBook Air</h3>
+								<p>Desde $999 o $83.25 / por mes durante 12 meses</p>
+								<div class="dark_white_bg text-center" ><img  src="img/producto_02.png" width="300" alt="#"/></div><br>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="col-sm-4 rounded-corner" style="background-color: #000000; color: #FFFFFF;">
+				<a href="iphone-15-pro.html" style="color: #ffffff;">
+					<div class="container mt-5">
+						<div class="row">
+							<div class="col-sm-12">
+								<h3>iPhone 15 Pro</h3><span class="badge badge-pill badge-primary">Mas destacado</span>
+								<p>Desde $999 o $41.62 / por mes durante 24 meses.</p>
+								<div class="dark_white_bg text-center" ><img  src="img/producto_03.png" width="300" alt="#"/></div><br>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+			
+
+			<div class="col-sm-4 rounded-corner" style="background-color: #000000; color: #FFFFFF;">
+				<a href="apple-watch.html" style="color: #ffffff;">
+					<div class="container mt-5">
+						<div class="row">
+							<div class="col-sm-12">
+								<h3>Apple Watch Series 9</h3>
+								<p>Desde $399 o $33.25 / por mes durante 12 meses.</p>
+								<div class="dark_white_bg text-center" ><img  src="img/producto_04.png" width="100%" alt="#"/></div><br>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="col-sm-4 rounded-corner" style="background-color: #FFFFFF;">
+				<a href="ipad.html" style="color: #000000;">
+					<div class="container mt-5">
+						<div class="row">
+							<div class="col-sm-12">
+								<h3>iPad</h3>
+								<p>Desde $499 o $31.47 / por mes durante 12 meses</p>
+								<div class="dark_white_bg text-center" ><img  src="img/producto_05.png" width="300" alt="#"/></div><br>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="col-sm-4 rounded-corner" style="background-color: #FFFFFF;">
+				
+				<div class="container mt-5">
+					<div class="row">
+						<div class="col-sm-12">
+							<h3>iPhone 14</h3>
+							<span class="badge badge-pill badge-secondary">Agotado</span>
+							<div class="dark_white_bg text-center" ><img  src="img/producto_06.png" width="300" alt="#"/></div><br>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			
+			<div class="col-sm-4 rounded-corner" style="background-color: #FFFFFF;">
+				
+				<div class="container mt-5">
+					<div class="row">
+						<div class="col-sm-12">
+							<h3>MacBook Pro</h3>
+							<span class="badge badge-success">Proximamente</span>
+							<p>Desde $1599</p>
+							<div class="dark_white_bg text-center" ><img  src="img/producto_07.png" width="300" alt="#"/></div><br>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="col-sm-4 rounded-corner" style="background-color: #F2F2F2;">
+				<a href="apple-watch-ultra.html" style="color: #000000;">
+					<div class="container mt-5">
+						<div class="row">
+							<div class="col-sm-12">
+								<h3>Apple Watch Ultra 2</h3>
+								<p>Desde $799 o $66.58 / por mes durante 12 meses</p>
+								<div class="dark_white_bg text-center" ><img  src="img/producto_08.png" width="300" alt="#"/></div><br>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="col-sm-4 rounded-corner" style="background-color: #000000; color: #FFFFFF;">
+				<a href="ipad-pro.html" style="color: #ffffff;">
+					<div class="container mt-5">
+						<div class="row">
+							<div class="col-sm-12">
+								<h3>iPad Pro</h3>
+								<p>Desde $799 o $66.58 / por mes durante 12 meses.</p>
+								<div class="dark_white_bg text-center" ><img  src="img/producto_09.png" width="100%" alt="#"/></div><br>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+	</div><br><hr>
+
+	<div class="container mt-5">
+		<div class="row ">
+			<div class="col-12">
+				<h2>El Apple Store marca la diferencia. Aún más razones para comprar con nosotros.</h2>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container mt-5">
+		<div class="row">
+			<div class="col-sm-4 rounded-corner" style="background-color: #FFFFFF;">
+				<div class="container mt-5">
+					<div class="row">
+						<div class="col-sm-12 text-dark">
+							<h3>Opciones para</h3> <h3 class="text-success">pagar a plazos.</h3> <h3>Elige la que mejor te venga.</h3><br><br>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-4 rounded-corner" style="background-color: #FFFFFF;">
+				<div class="container mt-5">
+					<div class="row">
+						<div class="col-sm-12 text-dark">
+							<h3 class="text-primary">Renueva tu dispositivo</h3> <h3>y llévate un descuento para uno nuevo.</h3>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-4 rounded-corner" style="background-color: #FFFFFF;">
+				<div class="container mt-5">
+					<div class="row">
+						<div class="col-sm-12 text-dark">
+							<h3 class="text-danger">Personaliza</h3><h3>tu Mac y diseña tu propio Apple Watch.</h3>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container mt-5">
+		<div class="row">
+			<div class="col-sm-4 rounded-corner" style="background-color: #FFFFFF;">
+				<div class="container mt-5">
+					<div class="row">
+						<div class="col-sm-12 text-dark">
+							<h3>Compra en la </h3> <h3 class="text-primary">app Apple Store</h3><h3> y disfruta de una experiencia personalizada.</h3><br><br>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-4 rounded-corner" style="background-color: #FFFFFF;">
+				<div class="container mt-5">
+					<div class="row">
+						<div class="col-sm-12 text-dark">
+							<h3>Hazlos tuyos.</h3><h3 style="color: orchid;">Añade gratis un grabado con emojis, nombres y números.</h3>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-4 rounded-corner" style="background-color: #FFFFFF;">
+				<div class="container mt-5">
+					<div class="row">
+						<div class="col-sm-12 text-dark">
+							<h3>Disfruta de</h3><h3 class="text-success">entrega en dos horas</h3><h3>desde un Apple Store, entrega gratuita o recogida fácil.</h3>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div><br>
+	
+	<div class="container" style="position: fixed; bottom: 20px;">
+		<input type="checkbox" id="btn-mas">
+		<div class="redes">
+			<a href="https://www.youtube.com/@Apple" target="_blank" class='bx bxl-youtube'></a>
+			<a href="https://twitter.com/Apple" target="_blank" class='bx bxl-twitter'></a>
+			<a href="https://www.instagram.com/apple/" target="_blank" class='bx bxl-instagram'></a>
+		</div>
+		<div class="btn-mas">
+			<label for="btn-mas" class='bx bx-plus'></label>
+		</div>
+		
+	</div>
+
+		<!--Ventana Modal-->
+		<div class="modal" id="ingCliente">
+			<div class="modal-dialog">
+			  	<div class="modal-content">
+			  
+					<!-- Modal Header -->
+					<div class="modal-header">
+					<h4 class="modal-title">Contactar con Soporte</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					
+					<!-- Modal body -->
+					<div class="modal-body">
+						<form id="whatsappForm">
+							<div class="form-group">
+								<label for="txt_email">E-mail:</label>
+								<input type="email" class="form-control" id="txt_email" placeholder="" name="email" required>
+							</div>
+			
+							<div class="form-group">
+								<label for="txt_nombres">Nombre:</label>
+								<input type="text" class="form-control" id="txt_nombres" placeholder="" required>
+							</div>
+							<div class="form-group">
+								<label for="txt_celular">Teléfono:</label>
+								<input type="number" class="form-control" id="txt_celular" placeholder="" required>
+							</div>
+			
+							<div class="form-group">
+								<label for="txt_mensaje">Mensaje:</label>
+								<textarea class="form-control" id="txt_mensaje" rows="5" required></textarea>
+							</div>
+							<button type="submit" class="btn btn-primary" style="width: 100%;">Enviar</button>
+						</form>
+					</div>
+					
+					
+					<!-- Modal footer -->
+					<div class="modal-footer">
+					</div>
+			  	</div>
+			</div>
+		</div>
+
+	<hr>
+	<div class="container">
+		<div class="row">
+			<div class="col-12 col-md-12 order-2 order-md-1">
+				<p class="powered-by" style="font-size: 15px;">&copy; 2024 Apple Inc. Todos los derechos reservados</p>
+				<p style="font-size: 15px;">Política de privacidad | Uso de cookies | Condiciones de uso | Ventas y reembolsos | Avisos legales | Mapa del sitio</p>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		const searchInput = document.getElementById('searchInput');
+		const resultsContainer = document.getElementById('resultsContainer');
+	  
+		// Datos de ejemplo
+		const data = [
+		  { name: "Apple Vision Pro", url: "apple-vision-pro.html" },
+		  { name: "MacBook Air", url: "macbook-air.html" },
+		  { name: "iPhone 15 Pro", url: "iphone-15-pro.html" },
+		  { name: "Apple Watch Series 9", url: "apple-watch.html" },
+		  { name: "ipad", url: "ipad.html" },
+		  { name: "Apple Watch Ultra 2", url: "apple-watch-ultra.html" },
+		  { name: "iPad Pro", url: "ipad-pro.html" }
+		];
+	  
+		// Función para actualizar los resultados del buscador
+		function updateResults(query) {
+		  resultsContainer.innerHTML = ''; // Limpiar el contenedor de resultados
+	  
+		  if (query.trim() === '') {
+			resultsContainer.style.display = 'none';
+			return; // No hacer nada si la consulta está vacía
+		  }
+	  
+		  // Filtrar los elementos que coinciden con la consulta
+		  const filteredResults = data.filter(item => item.name.toLowerCase().includes(query.toLowerCase()));
+	  
+		  // Mostrar los resultados filtrados
+		  filteredResults.forEach(item => {
+			const resultItem = document.createElement('div');
+			resultItem.classList.add('resultItem');
+			resultItem.textContent = item.name;
+			// Agregar evento de clic para redireccionar a la página correspondiente
+			resultItem.addEventListener('click', () => {
+			  window.location.href = item.url;
+			});
+			resultsContainer.appendChild(resultItem);
+		  });
+	  
+		  // Mostrar el contenedor de resultados si hay resultados
+		  if (filteredResults.length > 0) {
+			resultsContainer.style.display = 'block';
+		  } else {
+			resultsContainer.style.display = 'none';
+		  }
+		}
+	  
+		// Evento de entrada en el campo de búsqueda
+		searchInput.addEventListener('input', (event) => {
+		  updateResults(event.target.value);
+		});
+	</script>
+
+	<script>
+		$(document).ready(function(){
+			$('#btnEnviar').click(function(e){
+				e.preventDefault();
+
+				var nombre = $('#txt_nombres').val();
+				var numero = $('#txt_celular').val();
+				var archivo = $('#fl_file').val();
+				var mensaje = $('#mensaje').val();
+
+				var whatsappURL = "https://wa.me/+51993230740?text="+encodeURIComponent(" " + nombre + "(" + numero + "),\n\n" + mensaje);
+				window.open(whatsappURL,'_blank');
+
+				$('#ingCliente .modal-body').html('<p class="text-success">Mensaje enviado a Whatsapp</p>');
+				$('#txt_nombres').val('');
+				$('#txt_celular').val('');
+				$('#fl_file').val('');
+				$('#mensaje').val('');
+
+			});
+		});
+	</script>
+</body>
+</html>

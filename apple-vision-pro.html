@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+	<link rel="icon" href="img/img_page.png" type="image/png">
+	<title>Comprar Apple Vision Pro</title>
+
+    <script>
+        // Función para cambiar el botón de continuar por el botón de carga
+        function showLoadingButton() {
+            document.getElementById("btnContinue").style.display = "none";
+            document.getElementById("btnLoading").style.display = "block";
+
+            // Después de 3 segundos, cambiar el botón de carga de vuelta al botón de continuar
+            setTimeout(function() {
+                document.getElementById("btnContinue").style.display = "block";
+                document.getElementById("btnLoading").style.display = "none";
+            }, 3000);
+
+            // Mostrar el modal después de 3 segundos
+            setTimeout(function() {
+                $('#myModal').modal('show');
+            }, 3000);
+        }
+    </script>
+
+	
+
+	<style>
+		body{
+			background-color: #ffffff;
+			font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+		}
+		
+		.rounded {
+         border-radius: 10px;
+      	}
+
+		.rounded-corner {
+    	border-radius: 35px;
+		transition: transform 0.3s ease;
+		}
+
+		.rounded-corner:hover {
+    	transform: scale(1.05); 
+		}
+
+		.rounded-img {
+        border-radius: 20px; /* Ajusta el valor según el radio deseado */
+    	}
+
+		a:link,
+      	a:visited,
+      	a:active {
+        text-decoration: none;
+      	}
+		
+		.custom-btn {
+   	 	font-size: 20px;
+		padding: 15px;
+		width: 100%;
+		border-radius: 15px;
+		}
+
+		/* Color de la sujerencia de busqueda*/
+		#resultsContainer {
+			display: none;
+			position: absolute;
+			width: 300px;
+			background-color: #ffffff; /* Color de fondo gris oscuro */
+			border: 1px solid #ccc;
+			border-radius: 5px; /* Bordes redondeados */
+			z-index: 1;
+			color: #fff; /* Color de texto blanco */
+		}
+
+		.resultItem {
+			padding: 10px;
+			cursor: pointer;
+			color: #999; /* Cambio a un color de texto negro grisáceo */
+		}
+
+		.resultItem:hover {
+			background-color: #f1f1f1; /* Cambio de color al pasar el ratón */
+		}
+	</style>
+
+	<script>
+	//botones
+	$(document).ready(function(){
+		$(".btn").click(function(){
+		$(this).toggleClass("active"); // Alternar la clase 'active' solo para el botón clickeado
+		});
+	});
+	</script>
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #000000;">
+
+		<div class="collapse navbar-collapse justify-content-center" id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<a class="navbar-brand" href="index.html"> <i class='bx bxl-apple bx-sm'></i> </a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" style="margin-right: 10px;">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<li class="nav-item" style="margin-right: 10px;">
+					<a class="nav-link" href="index.html" style="color:#fff;">Tienda</a>
+				</li>
+				<li class="nav-item" style="margin-right: 10px;">
+					<a class="nav-link" href="#" style="color:#fff;">Mac</a>
+				</li>
+				<li class="nav-item" style="margin-right: 10px;">
+					<a class="nav-link" href="#" style="color:#fff;">iPad</a>
+				</li>
+				<li class="nav-item" style="margin-right: 10px;">
+					<a class="nav-link" href="#" style="color:#fff;">iPhone</a>
+				</li>
+				<li class="nav-item" style="margin-right: 10px;">
+					<a class="nav-link" href="#" style="color:#fff;">Watch</a>
+				</li>
+				<li class="nav-item" style="margin-right: 10px;">
+					<a class="nav-link" href="#" style="color:#fff;">Airpods</a>
+				</li>
+				<li class="nav-item" style="margin-right: 10px;">
+					<a class="nav-link" href="#" style="color:#fff;">TV y Casa</a>
+				</li>
+				<li class="nav-item" style="margin-right: 10px;">
+					<a class="nav-link" href="#" style="color:#fff;">Entretenimiento</a>
+				</li>
+				<li class="nav-item" style="margin-right: 10px;">
+					<a class="nav-link" href="#" style="color:#fff;">Accesorios</a>
+				</li>
+				<li class="nav-item" style="margin-right: 10px;">
+					<a class="nav-link" href="#" style="color:#fff;">Soporte</a>
+				</li>
+								
+				<li class="nav-item" style="margin-right: 10px;">
+					<a class="navbar-brand" href="index.html"><i class='bx bx-shopping-bag' style='color:#ffffff' ></i> </a>
+				</li>
+
+				<li class="nav-item" style="margin-right: 10px;">
+					<a class="navbar-brand" href="index.html" data-toggle="collapse" data-target="#demo1"><i class='bx bx-search-alt-2' style='color:#ffffff' ></i></a>
+				</li>
+
+				<div id="demo1" class="collapse">
+					<input class="form-control mr-sm-2" type="text" placeholder="Buscar en apple.com" id="searchInput">
+					<div id="resultsContainer"></div>
+					<!-- <button class="btn btn-light" type="submit"><img src="img/buscar_logo.png" width="25px" height="25px"></button> -->
+				</div>
+				
+			</ul>
+		</div> 
+	</nav>
+
+
+	<br><br>
+	<div class="container mt-5">
+		<div class="row ">
+			<div class="col-6">
+				<span class="badge badge-pill badge-danger">Nuevo</span>
+				<h1>Comprar Apple Vision Pro</h1>
+				<p>De $3499 o $291.58 / por mes durante 12 meses</p>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container mt-5">
+		<div class="row ">
+			<div class="col-sm-8">
+				<div id="myCarousel" class="carousel slide" data-ride="carousel">
+					<!-- Indicadores -->
+					<ol class="carousel-indicators">
+					  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+					  <li data-target="#myCarousel" data-slide-to="1"></li>
+					  <li data-target="#myCarousel" data-slide-to="2"></li>
+					  <li data-target="#myCarousel" data-slide-to="3"></li>
+					</ol>
+				  
+					<!-- Contenido del Carousel -->
+					<div class="carousel-inner" style="border-radius: 20px;">
+					  <div class="carousel-item active">
+						<img src="img/apple-vision-pro/carousel_01.png" alt="vision-pro" class="rounded-img" width="756">
+					  </div>
+					  <div class="carousel-item">
+						<img src="img/apple-vision-pro/carousel_02.png" alt="vision-pro" class="rounded-img" width="756">
+					  </div>
+					  <div class="carousel-item">
+						<img src="img/apple-vision-pro/carousel_03.png" alt="vision-pro" class="rounded-img" width="756">
+					  </div>
+					  <div class="carousel-item">
+						<img src="img/apple-vision-pro/carousel_04.png" alt="vision-pro" class="rounded-img" width="756">
+					  </div>
+					</div>
+				  
+					<!-- Controles de navegación -->
+					<a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+					  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					  <span class="sr-only">Anterior</span>
+					</a>
+					<a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+					  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+					  <span class="sr-only">Siguiente</span>
+					</a>
+				</div><br>
+				<h2 style="text-align: center;">Contenido de la caja</h2>
+				<img src="img/apple-vision-pro/img_01.png" alt="vision-01" width="735"><br><br>
+				<img src="img/apple-vision-pro/img_02.png" alt="vision-01" width="735">
+				  
+			</div>
+
+			<div class="col-sm-4">
+				<div class="container mt-5">
+					<div class="row ">
+						<div class="col-sm-12">
+							<h2>Hagamos que Apple Vision Pro sea personal para usted.</h2>
+							<button type="button" class="btn btn-primary custom-btn" >Empezar</button><br>
+
+							<br>
+							<h2>Almacenamiento</h2>
+							<button type="button" class="btn btn-outline-primary custom-btn" style="margin: 4px;">256 GB</button>
+							<button type="button" class="btn btn-outline-primary custom-btn" style="margin: 4px;">512 GB</button>
+							<button type="button" class="btn btn-outline-primary custom-btn" style="margin: 4px;">1 TB</button>
+							<br><br>
+							
+							<h2>Opciones de pago.</h2>
+							<h3 class="text-secondary">Seleccione el que funcione para usted.</h3>
+
+							<button type="button" class="btn btn-outline-dark" style="width: 100%; border-radius: 15px; text-align: left; padding: 10px;">
+								<p>Comprar</p><hr>
+								<li>Pague el monto total hoy</li>
+								<li>Obtenga un reembolso diario del 3% cuando pague con Apple Card</li>
+							</button>
+							<br><br>
+							<button type="button" class="btn btn-outline-dark" style="width: 100%; border-radius: 15px; text-align: left; padding: 10px;">
+								<p>Finanzas</p>
+								<p>Cuotas mensuales de la tarjeta Apple</p><hr>
+								<li>Financiado al 0% TAE con cuotas mensuales de Apple Card </li>
+								<li>Obtenga un reembolso diario del 3% en efectivo por adelantado sobre el costo total de su Apple Vision Pro</li>
+							</button><br><br>
+
+							<h2>Desde $3499 o $291.58 / por mes durante 12 meses</h2><hr>
+							<button type="button" id="btnContinue" class="btn btn-primary" style="font-size: 18px; padding: 5px; width: 100%; border-radius: 15px" onclick="showLoadingButton()">Añadir a la bolsa</button>
+
+                            <button id="btnLoading" class="btn btn-primary" disabled style="display: none; font-size: 18px; padding: 5px; width: 100%; border-radius: 15px">
+                                <span class="spinner-border spinner-border-sm"></span>
+                                Cargando..
+                            </button>  
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Agregado</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    Se ha agregado a la bolsa
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Seguir comprando</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+		<hr>
+		<div class="container">
+			<div class="row">
+			  <div class="col-12 col-md-12 order-2 order-md-1">
+				<p class="powered-by" style="font-size: 15px;">&copy; 2024 Apple Inc. Todos los derechos reservados</p>
+				<p style="font-size: 15px;">Política de privacidad | Uso de cookies | Condiciones de uso | Ventas y reembolsos | Avisos legales | Mapa del sitio</p>
+			  </div>
+			</div>
+		</div>
+	
+		<script>
+			const searchInput = document.getElementById('searchInput');
+			const resultsContainer = document.getElementById('resultsContainer');
+		  
+			// Datos de ejemplo
+			const data = [
+			{ name: "Apple Vision Pro", url: "apple-vision-pro.html" },
+			{ name: "MacBook Air", url: "macbook-air.html" },
+			{ name: "iPhone 15 Pro", url: "iphone-15-pro.html" },
+			{ name: "Apple Watch Series 9", url: "apple-watch.html" },
+			{ name: "ipad", url: "ipad.html" },
+			{ name: "Apple Watch Ultra 2", url: "apple-watch-ultra.html" },
+			{ name: "iPad Pro", url: "ipad-pro.html" }
+			];
+		  
+			// Función para actualizar los resultados del buscador
+			function updateResults(query) {
+			  resultsContainer.innerHTML = ''; // Limpiar el contenedor de resultados
+		  
+			  if (query.trim() === '') {
+				resultsContainer.style.display = 'none';
+				return; // No hacer nada si la consulta está vacía
+			  }
+		  
+			  // Filtrar los elementos que coinciden con la consulta
+			  const filteredResults = data.filter(item => item.name.toLowerCase().includes(query.toLowerCase()));
+		  
+			  // Mostrar los resultados filtrados
+			  filteredResults.forEach(item => {
+				const resultItem = document.createElement('div');
+				resultItem.classList.add('resultItem');
+				resultItem.textContent = item.name;
+				// Agregar evento de clic para redireccionar a la página correspondiente
+				resultItem.addEventListener('click', () => {
+				  window.location.href = item.url;
+				});
+				resultsContainer.appendChild(resultItem);
+			  });
+		  
+			  // Mostrar el contenedor de resultados si hay resultados
+			  if (filteredResults.length > 0) {
+				resultsContainer.style.display = 'block';
+			  } else {
+				resultsContainer.style.display = 'none';
+			  }
+			}
+		  
+			// Evento de entrada en el campo de búsqueda
+			searchInput.addEventListener('input', (event) => {
+			  updateResults(event.target.value);
+			});
+		</script>
+</body>
+</html>
