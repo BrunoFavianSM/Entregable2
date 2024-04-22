@@ -547,7 +547,7 @@
 				var archivo = $('#fl_file').val();
 				var mensaje = $('#mensaje').val();
 
-				var whatsappURL = "https://wa.me/+51993230740?text="+encodeURIComponent(" " + nombre + "(" + numero + "),\n\n" + mensaje);
+				var whatsappURL = "https://wa.me/ ?text="+encodeURIComponent(" " + nombre + "(" + numero + "),\n\n" + mensaje);
 				window.open(whatsappURL,'_blank');
 
 				$('#ingCliente .modal-body').html('<p class="text-success">Mensaje enviado a Whatsapp</p>');
